@@ -1,0 +1,44 @@
+{
+  "player_name": "Noah Williams",
+  "position": "Left-Back",
+  "strengths": [
+    {
+      "strength": "Strong attacking output for a defender",
+      "evidence": "6 assists and 29 chances created in 1,260 minutes indicate a consistent contribution to attacking play from a full-back position."
+    },
+    {
+      "strength": "Effective defensive duel-winning",
+      "evidence": "45 tackles won and 36 interceptions over the sample show a high volume of successful defensive actions."
+    },
+    {
+      "strength": "Comfortable carrying the ball forward",
+      "evidence": "38 successful dribbles suggests confidence and success in beating opponents in possession."
+    }
+  ],
+  "development_areas": [
+    {
+      "area": "Passing reliability",
+      "evidence": "83% pass completion, which alongside a high chance-creation and dribbling output, may indicate a tendency toward riskier or lower-percentage passing.",
+      "suggested_action": "Work on decision-making around pass selection to balance progressive passing with retaining possession."
+    },
+    {
+      "area": "Goal output relative to attacking involvement",
+      "evidence": "Only 2 goals despite 29 chances created and 38 successful dribbles, suggesting limited end product when arriving in advanced areas.",
+      "suggested_action": "Targeted finishing and final-third decision-making practice to convert advanced positions into shooting opportunities."
+    }
+  ],
+  "recommended_role": {
+    "role": "Attacking left-back in a possession-based system",
+    "reason": "The combination of 6 assists, 29 chances created, and 38 successful dribbles points to a player suited to a role with license to join attacks and create chances from wide areas, while 45 tackles won and 36 interceptions support defensive responsibilities in such a system."
+  },
+  "recruitment_recommendation": "monitor",
+  "confidence": "medium",
+  "limitations": [
+    "Analysis is based on a single season/sample of statistics (1,260 minutes) with no data on consistency over time.",
+    "No positional or league-average benchmarks were provided, so it is not possible to contextualise how these numbers compare to peers.",
+    "No data provided on defensive errors, cards, aerial duels, or physical metrics (e.g. speed, distance covered).",
+    "No qualitative or video-based information (decision-making under pressure, positioning, communication) is included.",
+    "No injury, fitness, or attitude data is available, and none has been assumed.",
+    "Statistics do not indicate quality of opposition faced or match context (e.g. score state, formation)."
+  ]
+}

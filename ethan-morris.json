@@ -1,0 +1,46 @@
+
+{
+  "player_name": "Ethan Morris",
+  "position": "Striker",
+  "strengths": [
+    {
+      "strength": "Strong goal output",
+      "evidence": "13 goals in 1,510 minutes played"
+    },
+    {
+      "strength": "Effective in one-on-one situations / ball carrying",
+      "evidence": "25 successful dribbles recorded"
+    },
+    {
+      "strength": "Contributes to chance creation beyond just finishing",
+      "evidence": "22 chances created and 3 assists"
+    }
+  ],
+  "development_areas": [
+    {
+      "area": "Passing accuracy and ball retention",
+      "evidence": "Pass completion of 74%",
+      "suggested_action": "Work on decision-making and technical execution in possession to improve pass completion rate"
+    },
+    {
+      "area": "Conversion of created chances into assists",
+      "evidence": "22 chances created against only 3 assists",
+      "suggested_action": "Review end product and final-pass quality to improve the ratio of created chances that result in assists"
+    }
+  ],
+  "recommended_role": {
+    "role": "Mobile forward who drops into space to link play and create chances (e.g. second striker / withdrawn forward)",
+    "reason": "The combination of goal output (13 goals), dribbling ability (25 successful dribbles), and chance creation (22 chances created) suggests a forward involved in build-up play rather than a purely penalty-box finisher, supported also by defensive contributions (8 tackles won, 4 interceptions)"
+  },
+  "recruitment_recommendation": "monitor",
+  "confidence": "medium",
+  "limitations": [
+    "No league-average or benchmark data provided, so it is not possible to judge whether these statistics are strong, average, or weak relative to peers",
+    "No per-90 or per-match breakdown provided beyond total minutes, limiting precision of rate-based judgments",
+    "No data provided on shots taken, shot accuracy, expected goals (xG), or expected assists (xA), limiting assessment of finishing quality and underlying performance",
+    "No positional, tactical, or team-context data provided (e.g. role within team shape, opposition quality, competition level)",
+    "No data on consistency across matches or across multiple seasons",
+    "No information provided on injuries, physical attributes, personality, or transfer value, and none has been assumed",
+    "Analysis is based solely on the listed statistics and should not be treated as a complete scouting assessment"
+  ]
+}

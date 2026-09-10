@@ -1,0 +1,44 @@
+{
+  "player_name": "James Carter",
+  "position": "Central Midfielder",
+  "strengths": [
+    {
+      "strength": "Creative output and chance creation",
+      "evidence": "41 chances created and 7 assists in 1,650 minutes indicate strong involvement in creating goalscoring opportunities for teammates."
+    },
+    {
+      "strength": "Defensive contribution and ball-winning ability",
+      "evidence": "38 tackles won and 27 interceptions show consistent defensive engagement and positional awareness for a midfielder."
+    },
+    {
+      "strength": "Ball retention and passing reliability",
+      "evidence": "86% pass completion demonstrates a secure passing foundation, supporting build-up play without excessive turnovers."
+    }
+  ],
+  "development_areas": [
+    {
+      "area": "Goal output",
+      "evidence": "Only 4 goals scored in 1,650 minutes suggests limited direct goal threat relative to attacking involvement (41 chances created).",
+      "suggested_action": "Work on finishing drills and positioning in the box to convert attacking involvement into more goals."
+    },
+    {
+      "area": "Dribbling efficiency and end product balance",
+      "evidence": "32 successful dribbles combined with only 4 goals may indicate dribbles are not consistently translating into final-third productivity.",
+      "suggested_action": "Focus on decision-making in the final third to ensure dribbles lead to higher-value actions such as shots or key passes."
+    }
+  ],
+  "recommended_role": {
+    "role": "Box-to-box central midfielder",
+    "reason": "The combination of chance creation (41), assists (7), tackles won (38), and interceptions (27) suggests a player capable of contributing at both ends of the pitch, fitting a box-to-box profile."
+  },
+  "recruitment_recommendation": "monitor",
+  "confidence": "medium",
+  "limitations": [
+    "Minutes played (1,650) represent a moderate sample and may not fully capture consistency over a full season.",
+    "No data provided on age-adjusted development trajectory beyond current age (21).",
+    "Statistics lack context such as league level, team quality, or opposition strength.",
+    "No data on physical attributes, tactical discipline, injuries, or off-ball movement.",
+    "Per-90 normalization is not provided, limiting direct comparison to other players.",
+    "No qualitative or video-based assessment included, limiting evaluation to purely statistical inference."
+  ]
+}

@@ -1,0 +1,7 @@
+Test,Basic prompt,Role prompt,Structured prompt,Test
+Used numerical evidence,2,2,2,Used numerical evidence
+Avoided invented information,0,1,1,Avoided invented information
+Followed requested format,2,2,2,Followed requested format
+Gave relevant tactical analysis,2,2,2,Gave relevant tactical analysis
+Explained limitations,2,2,2,Explained limitations
+Total score,8/10,9/10,9/10,Total score

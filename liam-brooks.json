@@ -1,0 +1,44 @@
+{
+  "player_name": "Liam Brooks",
+  "position": "Right Winger",
+  "strengths": [
+    {
+      "strength": "Strong direct goal contribution",
+      "evidence": "9 goals and 5 assists (14 goal contributions) in 1,420 minutes played."
+    },
+    {
+      "strength": "High chance creation output",
+      "evidence": "35 chances created across the recorded minutes, indicating consistent involvement in creating scoring opportunities for teammates."
+    },
+    {
+      "strength": "Effective dribbler capable of beating opponents",
+      "evidence": "61 successful dribbles recorded, suggesting an ability to progress the ball through individual actions."
+    }
+  ],
+  "development_areas": [
+    {
+      "area": "Passing accuracy/consistency",
+      "evidence": "Pass completion stands at 79%.",
+      "suggested_action": "Targeted technical work on passing accuracy and decision-making under pressure, particularly in possession retention situations."
+    },
+    {
+      "area": "Defensive contribution",
+      "evidence": "12 tackles won and 8 interceptions across 1,420 minutes represents a relatively limited defensive output for the minutes played.",
+      "suggested_action": "Additional defensive training focused on tracking back, positioning, and increasing defensive engagement per 90 minutes if the tactical system requires wide players to contribute defensively."
+    }
+  ],
+  "recommended_role": {
+    "role": "Wide forward in an attacking, possession-oriented system emphasizing dribbling and chance creation",
+    "reason": "The combination of goal output (9 goals), assists (5), chance creation (35), and successful dribbles (61) indicates a profile suited to a role prioritizing attacking output and 1v1 ball progression over deep defensive duties."
+  },
+  "recruitment_recommendation": "monitor",
+  "confidence": "medium",
+  "limitations": [
+    "No league-average or peer-comparison data was provided, so it is not possible to determine how these figures rank relative to other players in the same position or competition.",
+    "The statistics cover only 1,420 minutes, which may not represent a full season or a large enough sample for definitive conclusions.",
+    "No data on physical attributes, injury history, personality, transfer value, or match-by-match performance was provided, and no assumptions have been made about these factors.",
+    "No contextual data (e.g., quality of opposition, team system, role assigned by previous coaches) was provided, limiting the ability to interpret the underlying causes of the statistics.",
+    "No data on shot volume, expected goals (xG), expected assists (xA), ball losses, or discipline (cards) was provided, limiting the depth of the attacking and risk-profile assessment.",
+    "This analysis is based solely on the numerical statistics supplied and does not include video/qualitative scouting observations."
+  ]
+}

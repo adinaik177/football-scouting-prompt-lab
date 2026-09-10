@@ -1,0 +1,44 @@
+{
+  "player_name": "Daniel Okoro",
+  "position": "Centre-Back",
+  "strengths": [
+    {
+      "strength": "Strong defensive duelling ability",
+      "evidence": "54 tackles won over 1,800 minutes indicates consistent success in ground duels."
+    },
+    {
+      "strength": "Good reading of the game / positioning",
+      "evidence": "49 interceptions over 1,800 minutes suggests an ability to anticipate opposition play and cut out passes."
+    },
+    {
+      "strength": "Reliable passer under possession-based play",
+      "evidence": "91% pass completion indicates a low error rate in distribution."
+    }
+  ],
+  "development_areas": [
+    {
+      "area": "Limited attacking output and creativity",
+      "evidence": "Only 1 goal, 1 assist, and 7 chances created across 1,800 minutes shows minimal offensive contribution.",
+      "suggested_action": "Incorporate targeted training on set-piece attacking positioning and forward passing options to increase offensive involvement."
+    },
+    {
+      "area": "Low ball-carrying output",
+      "evidence": "6 successful dribbles across 1,800 minutes suggests limited use of carrying the ball out from defence.",
+      "suggested_action": "Work on ball-carrying drills and decision-making around progressing play under pressure, if this is a desired part of the playing style."
+    }
+  ],
+  "recommended_role": {
+    "role": "Defensive-minded Centre-Back in a back four or back three, focused on ground duels and interceptions",
+    "reason": "The combination of 54 tackles won, 49 interceptions, and 91% pass completion supports a role prioritising defensive solidity and secure distribution over progressive ball-carrying or chance creation."
+  },
+  "recruitment_recommendation": "monitor",
+  "confidence": "medium",
+  "limitations": [
+    "No league-average or positional benchmark data was provided, so it is not possible to determine how these statistics compare to peers.",
+    "No data on aerial duels, clearances, blocks, errors leading to goals, or defensive positioning metrics was provided, limiting the completeness of the defensive assessment.",
+    "No physical, fitness, injury, or personality data was provided and none has been assumed.",
+    "No transfer value, contract, or market data was provided and none has been assumed.",
+    "The stats cover a single sample of 1,800 minutes and do not indicate consistency, trend over time, or performance across different match contexts (e.g. opposition quality, competition level).",
+    "No goalkeeping/team defensive context (e.g. team's overall defensive record) was provided to contextualise individual defensive numbers."
+  ]
+}
