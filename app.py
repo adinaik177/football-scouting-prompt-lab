@@ -1,205 +1,309 @@
 import json
+from pathlib import Path
 
+import pandas as pd
 import streamlit as st
-from anthropic import Anthropic
 
 
 st.set_page_config(
-    page_title="AI Football Scout",
+    page_title="Football Scouting Prompt Lab",
     page_icon="⚽",
-    layout="centered"
+    layout="wide",
 )
 
-st.title("AI Football Scouting Assistant")
+BASE_FOLDER = Path(__file__).parent
+RESULTS_FOLDER = BASE_FOLDER / "results"
+PROMPTS_FOLDER = BASE_FOLDER / "prompts"
+EVALUATION_FILE = BASE_FOLDER / "evaluation" / "evaluation-results.csv"
+
+
+def load_json(file_path):
+    """Load a JSON response and remove accidental Markdown fences."""
+    text = file_path.read_text(encoding="utf-8").strip()
+
+    if text.startswith("```json"):
+        text = text[7:]
+    elif text.startswith("```"):
+        text = text[3:]
+
+    if text.endswith("```"):
+        text = text[:-3]
+
+    return json.loads(text.strip())
+
+
+st.title("⚽ Football Scouting Prompt Evaluation Lab")
+
 st.write(
-    "Enter a player's statistics to generate a structured "
-    "AI-assisted scouting report."
+    """
+    This project examines how prompt structure affects the quality,
+    consistency and factual grounding of AI-generated football scouting reports.
+    """
 )
 
-with st.form("player_form"):
-    player_name = st.text_input("Player name", "James Carter")
-    age = st.number_input("Age", min_value=16, max_value=45, value=21)
-    position = st.selectbox(
-        "Position",
-        [
-            "Goalkeeper",
-            "Centre-Back",
-            "Right-Back",
-            "Left-Back",
-            "Defensive Midfielder",
-            "Central Midfielder",
-            "Attacking Midfielder",
-            "Right Winger",
-            "Left Winger",
-            "Striker"
-        ]
-    )
+st.info(
+    "The players and statistics used in this project are fictional. "
+    "The reports are pre-generated evaluation results, not live scouting advice."
+)
 
-    minutes = st.number_input(
-        "Minutes played",
-        min_value=1,
-        value=1650
-    )
-
-    goals = st.number_input("Goals", min_value=0, value=4)
-    assists = st.number_input("Assists", min_value=0, value=7)
-
-    pass_completion = st.number_input(
-        "Pass completion (%)",
-        min_value=0.0,
-        max_value=100.0,
-        value=86.0
-    )
-
-    chances_created = st.number_input(
-        "Chances created",
-        min_value=0,
-        value=41
-    )
-
-    tackles_won = st.number_input(
-        "Tackles won",
-        min_value=0,
-        value=38
-    )
-
-    interceptions = st.number_input(
-        "Interceptions",
-        min_value=0,
-        value=27
-    )
-
-    successful_dribbles = st.number_input(
-        "Successful dribbles",
-        min_value=0,
-        value=32
-    )
-
-    submitted = st.form_submit_button("Generate scouting report")
+report_tab, comparison_tab, prompts_tab, methodology_tab = st.tabs(
+    [
+        "Player Reports",
+        "Prompt Comparison",
+        "Prompt Versions",
+        "Methodology",
+    ]
+)
 
 
-if submitted:
-    prompt = f"""
-You are a football performance analyst supporting a recruitment team.
+with report_tab:
+    st.header("Structured scouting reports")
 
-Analyse this player using only the supplied statistics.
+    json_files = sorted(RESULTS_FOLDER.glob("*.json"))
 
-Player:
-- Name: {player_name}
-- Age: {age}
-- Position: {position}
-- Minutes played: {minutes}
-- Goals: {goals}
-- Assists: {assists}
-- Pass completion: {pass_completion}%
-- Chances created: {chances_created}
-- Tackles won: {tackles_won}
-- Interceptions: {interceptions}
-- Successful dribbles: {successful_dribbles}
+    if not json_files:
+        st.error(
+            "No JSON reports were found. Check that your files are "
+            "inside the results folder."
+        )
+    else:
+        player_options = {
+            file_path.stem.replace("-", " ").title(): file_path
+            for file_path in json_files
+        }
 
-Identify:
-1. Three strengths
-2. Two development areas
-3. One suitable tactical role
-4. A recruitment recommendation
-5. Limitations of the analysis
-
-Rules:
-- Use only the supplied statistics.
-- Every conclusion must include numerical evidence.
-- Do not invent information.
-- Do not describe a metric as strong, weak, high or low unless a
-  suitable benchmark has been supplied.
-- Treat successful dribbles as volume, not efficiency, because
-  attempted dribbles have not been supplied.
-- Do not infer finishing ability from chances created.
-- Clearly identify information that is missing.
-- Return only valid JSON.
-- Do not place the JSON inside Markdown code fences.
-
-Use this exact structure:
-
-{{
-  "player_name": "",
-  "position": "",
-  "strengths": [
-    {{
-      "strength": "",
-      "evidence": ""
-    }}
-  ],
-  "development_areas": [
-    {{
-      "area": "",
-      "evidence": "",
-      "suggested_action": ""
-    }}
-  ],
-  "recommended_role": {{
-    "role": "",
-    "reason": ""
-  }},
-  "recruitment_recommendation": "recommend, monitor, or insufficient evidence",
-  "confidence": "high, medium, or low",
-  "limitations": []
-}}
-"""
-
-    try:
-        client = Anthropic(
-            api_key=st.secrets["ANTHROPIC_API_KEY"]
+        selected_player = st.selectbox(
+            "Select a player",
+            list(player_options.keys()),
         )
 
-        with st.spinner("Analysing the player..."):
-            message = client.messages.create(
-                model=st.secrets["ANTHROPIC_MODEL"],
-                max_tokens=1500,
-                messages=[
-                    {
-                        "role": "user",
-                        "content": prompt
-                    }
-                ]
+        try:
+            report = load_json(player_options[selected_player])
+
+            col1, col2, col3 = st.columns(3)
+
+            col1.metric(
+                "Player",
+                report.get("player_name", "Not provided"),
             )
 
-        response_text = message.content[0].text.strip()
+            col2.metric(
+                "Position",
+                report.get("position", "Not provided"),
+            )
 
-        # Remove Markdown fences if the model adds them.
-        if response_text.startswith("```json"):
-            response_text = response_text[7:]
-        elif response_text.startswith("```"):
-            response_text = response_text[3:]
+            col3.metric(
+                "Recommendation",
+                report.get(
+                    "recruitment_recommendation",
+                    "Not provided",
+                ).title(),
+            )
 
-        if response_text.endswith("```"):
-            response_text = response_text[:-3]
+            st.subheader("Strengths")
 
-        response_text = response_text.strip()
+            for strength in report.get("strengths", []):
+                with st.container(border=True):
+                    st.markdown(
+                        f"**{strength.get('strength', 'Strength')}**"
+                    )
+                    st.write(
+                        strength.get(
+                            "evidence",
+                            "No evidence provided.",
+                        )
+                    )
 
-        try:
-            report = json.loads(response_text)
+            st.subheader("Development areas")
 
-            st.success("Scouting report generated")
-            st.subheader("Player assessment")
-            st.json(report)
+            for area in report.get("development_areas", []):
+                with st.container(border=True):
+                    st.markdown(
+                        f"**{area.get('area', 'Development area')}**"
+                    )
+                    st.write(
+                        f"Evidence: {area.get('evidence', 'Not provided')}"
+                    )
+                    st.write(
+                        "Suggested action: "
+                        + area.get(
+                            "suggested_action",
+                            "Not provided",
+                        )
+                    )
+
+            st.subheader("Recommended tactical role")
+
+            role = report.get("recommended_role", {})
+
+            st.markdown(
+                f"**{role.get('role', 'Not provided')}**"
+            )
+            st.write(role.get("reason", "No reason provided."))
+
+            st.subheader("Confidence")
+
+            st.write(
+                report.get("confidence", "Not provided").title()
+            )
+
+            st.subheader("Limitations")
+
+            limitations = report.get("limitations", [])
+
+            if limitations:
+                for limitation in limitations:
+                    st.write(f"- {limitation}")
+            else:
+                st.write("No limitations were recorded.")
 
             st.download_button(
-                label="Download report as JSON",
+                label="Download this report",
                 data=json.dumps(report, indent=2),
-                file_name=f"{player_name.lower().replace(' ', '-')}.json",
-                mime="application/json"
+                file_name=player_options[selected_player].name,
+                mime="application/json",
             )
+
+            with st.expander("View the complete JSON"):
+                st.json(report)
 
         except json.JSONDecodeError:
-            st.warning(
-                "The model returned a response that was not valid JSON."
+            st.error(
+                "This player file does not contain valid JSON. "
+                "Check for missing brackets, incomplete text or code fences."
             )
-            st.text(response_text)
 
-    except Exception as error:
-        st.error(f"Unable to generate report: {error}")
+
+with comparison_tab:
+    st.header("Prompt comparison")
+
+    comparison_data = pd.DataFrame(
+        {
+            "Evaluation criterion": [
+                "Used numerical evidence",
+                "Avoided invented information",
+                "Followed requested format",
+                "Gave relevant tactical analysis",
+                "Explained limitations",
+                "Total score",
+            ],
+            "Basic prompt": [2, 0, 2, 2, 2, 8],
+            "Role prompt": [2, 1, 2, 2, 2, 9],
+            "Structured prompt": [2, 1, 2, 2, 2, 9],
+        }
+    )
+
+    st.dataframe(
+        comparison_data,
+        use_container_width=True,
+        hide_index=True,
+    )
+
+    col1, col2, col3 = st.columns(3)
+
+    col1.metric("Basic prompt", "8/10")
+    col2.metric("Role prompt", "9/10")
+    col3.metric("Structured prompt", "9/10")
+
+    st.metric("Structured-output reliability", "96.7%")
+
+    st.caption(
+        "Scoring: 0 = failed, 1 = partly passed, 2 = fully passed."
+    )
+
+    st.subheader("Main finding")
+
+    st.write(
+        """
+        The structured prompt produced the most consistent format across
+        the five player profiles. It passed 29 of 30 reliability checks.
+        The remaining failure came from Markdown code fences around one
+        JSON response.
+        """
+    )
+
+    if EVALUATION_FILE.exists():
+        with st.expander("View uploaded evaluation file"):
+            evaluation_data = pd.read_csv(EVALUATION_FILE)
+            st.dataframe(
+                evaluation_data,
+                use_container_width=True,
+                hide_index=True,
+            )
+
+
+with prompts_tab:
+    st.header("Prompt versions")
+
+    prompt_files = sorted(PROMPTS_FOLDER.glob("*.md"))
+
+    if not prompt_files:
+        st.warning(
+            "No prompt files were found inside the prompts folder."
+        )
+    else:
+        for prompt_file in prompt_files:
+            prompt_name = (
+                prompt_file.stem
+                .replace("-", " ")
+                .replace("01 ", "")
+                .replace("02 ", "")
+                .replace("03 ", "")
+                .title()
+            )
+
+            with st.expander(prompt_name):
+                st.code(
+                    prompt_file.read_text(encoding="utf-8"),
+                    language="text",
+                )
+
+
+with methodology_tab:
+    st.header("Evaluation methodology")
+
+    st.write(
+        """
+        Three prompt versions were tested:
+
+        1. A basic zero-shot prompt
+        2. A role-based prompt
+        3. A structured production prompt
+
+        The structured prompt was then tested across five fictional
+        player profiles.
+        """
+    )
+
+    st.subheader("Evaluation criteria")
+
+    st.write(
+        """
+        Each response was assessed for:
+
+        - Numerical evidence
+        - Unsupported or invented claims
+        - Format compliance
+        - Tactical relevance
+        - Explanation of limitations
+        - Valid JSON structure
+        """
+    )
+
+    st.subheader("Important limitations")
+
+    st.write(
+        """
+        This is an educational prompt-engineering project. It does not
+        replace professional scouting, video analysis, medical evaluation
+        or contextual performance data. No real players or confidential
+        club information were used.
+        """
+    )
 
 st.divider()
+
 st.caption(
-    "Educational portfolio project. AI output should be supported "
-    "by video scouting, contextual data and human evaluation."
+    "Created by Aditya Naik as a prompt-engineering and "
+    "football-analytics portfolio project."
 )
